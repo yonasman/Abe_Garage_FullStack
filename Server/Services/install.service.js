@@ -1,46 +1,52 @@
 // import db connection
-const { resolve } = require("path")
-const query = require("../Config/dbConfig")
+const conn = require("../Config/dbConfig")
 // import fs module to read the sql file
-const fs = require("fs")
+const fs = require("fs").promises
+// import path module
+const path = require("path")
 // function handling installing the db tables
 async function install() {
-    // path to sql file
-    const sqlPath = __dirname + "../Resources/queries.sql"
+    try {
+      // path to sql file
+    const sqlPath = path.join(__dirname, "../Resources/queries.sql")
     // variable to store the queries
     const queries = [];
-    const tempLine = "";
+    let tempLine = "";
     finalMessage = {};
     // read the file
-    const lines = await fs.writeFileSync(sqlPath,"utf-8").split("/n")
+    const fileContent = await fs.readFile(sqlPath,"utf-8");
+    const lines = fileContent.split("\n");
     // handling the asynchronous reading of file and storing on the variable
-    const executed = await new Promise((resolve,reject) => {
-        lines.forEach((line) => {
-            if(line.trim().startsWith("--") || line.trim() === "") {
-                return
-            }
-            tempLine += line
-            if(tempLine.trim().endsWith(";")) {
-                queries.push(tempLine)
-                tempLine = ""
-            }
-            resolve("Queries are added to the list");
-        })
-    })
-    // loop through the queries array and execute the queries
-    for (let i = 0;i < queries.length;i++) {
-        try {
-            const result = await query(queries[i])
-            console.log("Tables created!")
-        } catch (error) {
-            finalMessage.message = "Not all tables are created"
+    for(let line of lines) {
+        line = line.trim()
+        if(line.startsWith("--") || line === "") {
+            continue
+        }
+        tempLine += line
+        if(line.endsWith(";")) {
+            queries.push(tempLine)
+            tempLine = "" // reset the tempLine after pushing the query
         }
     }
+    for(let i = 0;i < queries.length;i++) {
+        try {
+            let result = await conn.query(queries[i])
+            console.log(result)
+            // console.log("Query executed successfully" + queries[i]);
+        } catch (error) {
+            // console.error("Queries not executed successfully" + queries[i])
+            finalMessage.message = "Not All tables created"
+        }
+    }  
     if(!finalMessage.message) {
-        finalMessage.message = "All tables created successfully"
         finalMessage.status = 200
+        finalMessage.message = "All tables created successfully"
     } else {
         finalMessage.status = 500
     }
+    } catch (error) {
+        console.log(error)
+    }
+    return finalMessage
 }
 module.exports = {install}

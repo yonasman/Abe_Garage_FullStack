@@ -2,7 +2,8 @@
 const installService = require("../Services/install.service");
 // install function
 async function install(req,res,next) {
-    const installMessage = await installService.install
+    const installMessage = await installService.install()
+    console.log(installMessage)
     // check if the installing is successful or not
     if(installMessage.status === 200) {
         res.status(200).json({
