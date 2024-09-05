@@ -3,7 +3,7 @@ const {employeeExits,createEmployeeService} = require("../Services/employee.serv
 // a function to control employee creation
 async function createEmployee(req,res,next) {
     // employee data
-    const email = req.body.email
+    const email = req.body.employee_email
     // check if the user exists
     try {
         const employee = await employeeExits(email)
