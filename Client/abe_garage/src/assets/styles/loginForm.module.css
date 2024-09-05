@@ -1,0 +1,29 @@
+.login_wrapper {
+    margin-left: 10vw;
+    margin-top: 40px;
+}
+.login_btn {
+    background-color: #D60C08;
+    margin-top: 25px;
+    margin-bottom: 60px;
+    width: 80px;
+    height: 35px;
+    color: #fff;
+}
+h2 {
+    padding-bottom: 40px;
+    font-weight: bold;
+}
+span {
+    font-weight: normal;
+    color: #D60C08
+}
+input:not(:last-child) {
+    display: block;
+    border: 1px solid #c6c0c0;
+    width: 34vw;
+    height: 37px;
+    margin-bottom: 20px;
+    padding-left: 8px;
+}
+
