@@ -1,5 +1,3 @@
-// import db config
-// const {pool} = require("../Config/dbConfig")
 // import employee service to get the employee by email
 const employeeService = require("../Services/employee.service")
 // import bcrypt to compare password
@@ -34,9 +32,8 @@ async function login(employeeData) {
                 status : "success",
                 data : employee
             }
+            return returnData
         }
-        
-        return returnData
     } catch (error) {
         console.log(error)
     }

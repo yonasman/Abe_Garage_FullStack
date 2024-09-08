@@ -48,6 +48,7 @@ async function createEmployeeService(employeeData) {
         // check if the company role exists
         const checkRole = "SELECT * FROM company_roles WHERE company_role_id=?"
         const [roleRow] = await conn.query(checkRole,[roleId])
+        console.log(roleRow)
         if(roleRow.length == 0) {
             // const insertRoleQuery = "INSERT INTO company_roles (company_role_id, company_role_name) VALUES (?, ?)";
             // await conn.query(insertRoleQuery, [roleId, roleName]);

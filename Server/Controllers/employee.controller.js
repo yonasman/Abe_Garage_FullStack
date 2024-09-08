@@ -16,7 +16,7 @@ async function createEmployee(req,res,next) {
         } else {
             try {
                 const addedEmployee = await createEmployeeService(req.body)
-                if(addedEmployee) {
+                if(Object.keys(addedEmployee).length) {
                     const response = {
                         status : 201,
                         message : "Employee added successfully"

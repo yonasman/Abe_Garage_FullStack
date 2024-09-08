@@ -17,7 +17,6 @@ async function login(req, res, next) {
             res.status(401).json(response);
         } else {
             // data to send to the client
-            console.log(employee)
             const payload = {
                 name: employee.data.employee_first_name,
                 employee_role: employee.data.employee_role_id,
