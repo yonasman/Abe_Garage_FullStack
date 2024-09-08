@@ -52,5 +52,14 @@ async function createEmployeeService(employeeData) {
     }
    return createdEmployee
 }
+async function getEmployeeByEmail(employeeEmail) {
+    try {
+        const sql = "SELECT * FROM employee JOIN employee_info USING (employee_id) JOIN employee_pass USING (employee_id) JOIN employee_role USING (employee_id) WHERE employee.employee_email = ?;"
+        const employee = await conn.query(sql,[employeeEmail])
+        return employee
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-module.exports = {employeeExits, createEmployeeService}
+module.exports = {employeeExits, createEmployeeService, getEmployeeByEmail}

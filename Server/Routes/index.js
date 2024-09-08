@@ -10,5 +10,9 @@ router.use(installRouter)
 const employeeRouter = require("../routes/employee.routes")
 // add employee router to middleware chain
 router.use(employeeRouter)
+// import login router
+const loginRouter = require("../routes/login.routes.js")
+// add login to middleware chain
+router.use(loginRouter)
 // export router
 module.exports = router
