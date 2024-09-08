@@ -1,5 +1,5 @@
 // import db config
-const conn = require("../Config/dbConfig")
+// const {pool} = require("../Config/dbConfig")
 // import employee service to get the employee by email
 const employeeService = require("../Services/employee.service")
 // import bcrypt to compare password
@@ -12,9 +12,7 @@ async function login(employeeData) {
         // employee data
         const email = employeeData.employee_email
         const password = employeeData.employee_password
-
-        const employee = await employeeService.getEmployeeByEmail(email)
-        console.log(employee)
+        const [employee] = await employeeService.getEmployeeByEmail(email)
         // check if the employee exists
         if(employee.length == 0) {
             returnData = {
@@ -23,7 +21,7 @@ async function login(employeeData) {
             }
             return returnData
         }
-        const passwordMatch = bcrypt.compare(password, employee.employee_password_hashed)
+        const passwordMatch = await bcrypt.compare(password, employee.employee_password_hashed)
         // check if the password is correct
         if(!passwordMatch) {
             returnData = {
@@ -31,11 +29,13 @@ async function login(employeeData) {
                 message : "password incorrect"
             }
             return returnData
+        } else {
+            returnData = {
+                status : "success",
+                data : employee
+            }
         }
-        returnData = {
-            status : "success",
-            data : employee
-        }
+        
         return returnData
     } catch (error) {
         console.log(error)

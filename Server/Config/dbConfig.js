@@ -14,18 +14,20 @@ const dbConfig = {
 const pool = mysql2.createPool(dbConfig)
 
 // get the connection and log status of the connection
-pool.getConnection((err, connection) => {
-    if(err) {
-        console.log("Error in connecting to db")
-    } else {
-        console.log("connected to db")
-        // release the connection back to pool
+async function checkConnection() {
+    try {
+        const connection = await pool.getConnection();
+        console.log("connected to db successfully")
         connection.release();
+    } catch (error) {
+        console.log("Error connecting to db", error.message)
     }
-})
+}
+// call the function to check the connection
+checkConnection();
 // a function to handle db query
 async function query(sql,params) {
     const [rows,fields] = await pool.query(sql,params)
     return rows
 }
-module.exports = {query}
+module.exports = {pool,query}
