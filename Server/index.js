@@ -1,5 +1,15 @@
 // import express
 const express = require("express")
+// initialize the express app
+const app = express()
+// allow cors
+const cors = require("cors")
+const url = process.env.FRONTEND_URL || "http://localhost:5173"
+const corsOptions = {
+    origin : url,
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions))
 // import router
 // const router = require("./routes")
 const router = require("./routes")
@@ -7,20 +17,10 @@ const router = require("./routes")
 require("dotenv").config()
 // import port
 const PORT = process.env.PORT
-// initialize the express app
-const app = express()
 // add express.json to middleware chain to parse request body
 app.use(express.json())
 // add the routes to middleware chain
 app.use(router)
-// allow cors
-const cors = require("cors")
-const url = process.env.FRONTEND_URL
-const corsOptions = {
-    origin : url,
-    optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions))
 // import sanitize module
 const sanitize = require("sanitize")
 // add sanitize to the middleware chain

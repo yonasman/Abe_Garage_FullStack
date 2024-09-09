@@ -11,19 +11,19 @@ async function employeeExits(employeeEmail) {
     
 }
 async function createEmployeeService(employeeData) {
+
     // get the connection
     const conn = await pool.getConnection()
     // an object to return the created employee
     let createdEmployee = {}
     // employee data
-    const email = employeeData.employee_email
-    const password = employeeData.employee_password
-    const firstName = employeeData.employee_first_name
-    const lastName = employeeData.employee_last_name
-    const phone = employeeData.employee_phone
-    const status = employeeData.active_employee
-    const roleId = employeeData.company_role_id
-    const roleName = employeeData.company_role_name
+    const email = employeeData.email
+    const password = employeeData.password
+    const firstName = employeeData.firstName
+    const lastName = employeeData.lastName
+    const phone = employeeData.phone
+    const status = employeeData.activeEmployee
+    const roleId = employeeData.employeeRole
     try {
         // begin db transaction
         await conn.beginTransaction();
@@ -48,7 +48,6 @@ async function createEmployeeService(employeeData) {
         // check if the company role exists
         const checkRole = "SELECT * FROM company_roles WHERE company_role_id=?"
         const [roleRow] = await conn.query(checkRole,[roleId])
-        console.log(roleRow)
         if(roleRow.length == 0) {
             // const insertRoleQuery = "INSERT INTO company_roles (company_role_id, company_role_name) VALUES (?, ?)";
             // await conn.query(insertRoleQuery, [roleId, roleName]);

@@ -47,6 +47,11 @@
   float: right;
   font-style: italic;
 }
+.success-msg{
+  color: rgb(13, 255, 0);
+  float: right;
+  font-style: italic;
+}
 select.custom-select-box {
   border-right: 25px solid #dddddd;
 }
