@@ -8,8 +8,8 @@ async function login(employeeData) {
         // a variable to store data to return to the controller
         let returnData = {}
         // employee data
-        const email = employeeData.employee_email
-        const password = employeeData.employee_password
+        const email = employeeData.email
+        const password = employeeData.password
         const [employee] = await employeeService.getEmployeeByEmail(email)
         // check if the employee exists
         if(employee.length == 0) {

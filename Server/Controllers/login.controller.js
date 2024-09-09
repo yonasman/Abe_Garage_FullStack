@@ -32,7 +32,7 @@ async function login(req, res, next) {
 
             res.status(200).json({
                 status: "success",
-                message: "Employee logged in successfully",
+                message: "Logged in successfully",
                 employeeToken: tokenData,
             });
         }

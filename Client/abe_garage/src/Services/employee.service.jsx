@@ -15,7 +15,6 @@ async function submit(formData) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`)
         }
         const result = await response.json()
-        console.log(result)
         return result
     } catch (error) {
         console.log(error)

@@ -26,4 +26,12 @@ input:not(:last-child) {
     margin-bottom: 20px;
     padding-left: 8px;
 }
-
+.login_wrapper .valid_error{
+    color: red;
+    /* float: right; */
+    font-style: italic;
+    margin-right: 200px;
+}
+.login_wrapper .success_msg {
+    color: rgb(18, 219, 48);
+}
