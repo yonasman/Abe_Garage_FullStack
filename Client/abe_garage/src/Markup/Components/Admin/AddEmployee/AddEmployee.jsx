@@ -64,7 +64,8 @@ function AddEmployeeForm() {
         employeeRole,
         password,
         activeEmployee
-      }  // send data to the employee service to send the data to server
+      }  
+      // send data to the employee service to send the data to server
       employeeService.submit(formData).then((result) => {
         if (result.status === "failed") {
           setServerError(result.message);

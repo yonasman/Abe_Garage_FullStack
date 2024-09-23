@@ -19,17 +19,16 @@ async function login(req, res, next) {
             // data to send to the client
             const payload = {
                 name: employee.data.employee_first_name,
-                employee_role: employee.data.employee_role_id,
+                employee_role: employee.data.company_role_id,
             };
 
             // sign and generate the token
-            const token = jwt.sign(payload, secret_key, { expiresIn: "30d" });
+            const token = jwt.sign(payload, secret_key, { expiresIn: "1hr" });
 
             // employee token
             const tokenData = {
                 employeeToken: token,
             };
-
             res.status(200).json({
                 status: "success",
                 message: "Logged in successfully",

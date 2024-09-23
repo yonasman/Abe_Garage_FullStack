@@ -2,7 +2,6 @@
 const baseUrl = import.meta.env.VITE_API_URL
 
 async function logIn(loginData) {
-    console.log(loginData)
     const options = {
         method : "POST",
         headers : {
@@ -23,7 +22,11 @@ async function logIn(loginData) {
         throw Error
     }
 }
+// log out function
+function logOut() {
+    localStorage.removeItem('token')
+}
 const loginService = {
-    logIn
+    logIn,logOut
 }
 export default loginService

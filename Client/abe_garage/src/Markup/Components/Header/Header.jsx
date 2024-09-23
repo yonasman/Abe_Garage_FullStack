@@ -1,6 +1,19 @@
+import { Link } from "react-router-dom"
 import logo from "../../../assets/images/logo.png"
+// import custom use context function(useAuth)
+import { useAuth } from "../../../Context/authContext"
+// import logout function from login service
+import loginService from "../../../Services/login.service"
 function Header() {
-  return (
+    const {isAdmin,isLoggedIn,employee,setIsAdmin,setIsLoggedIn} = useAuth()
+    // logout handler
+    function logOutHandler() {
+        // remove the token and logout
+        loginService.logOut();
+        // set login state to false
+        setIsLoggedIn(false)
+    }
+    return (
     <div>
     <header className="main-header header-style-one">
         <div className="header-top">
@@ -11,7 +24,7 @@ function Header() {
                         <div className="office-hour">Monday - Saturday 7:00AM - 6:00PM</div>
                     </div>
                     <div className="right-column">
-                    <div className="phone-number">Schedule Your Appontment Today : <strong>1800 456 7890</strong></div>
+                    {isLoggedIn ? (<div className="phone-number">Welcome {employee.employeeName}</div>):(<div className="phone-number">Schedule Your Appontment Today : <strong>1800 456 7890</strong></div>)}
                     </div>
                 </div>
             </div>
@@ -42,10 +55,9 @@ function Header() {
                         </div>
                         <div className="search-btn">
                             <button type="button" className="theme-btn search-toggler"></button></div>
-                        <div className="link-btn"><a href="#" className="theme-btn btn-style-one">Sign in </a> 
+                        {isLoggedIn ? (<div className="link-btn"><a href="#" className="theme-btn btn-style-one" onClick={()=>logOutHandler()}>Sign out</a></div>):(<div className="link-btn"><Link to='/login' href="#" className="theme-btn btn-style-one">Sign in </Link></div>)} 
                         </div> 
                     </div>                        
-                </div>
             </div>
         </div>
         </header>

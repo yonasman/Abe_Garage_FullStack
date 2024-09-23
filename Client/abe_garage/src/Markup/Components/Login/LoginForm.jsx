@@ -15,7 +15,7 @@ function LoginForm() {
     // initialize use navigate
     const navigate = useNavigate()
     // function to handle login
-async function handleLogin(e) {
+    async function handleLogin(e) {
         // prevent default permission
         e.preventDefault();
         // variable to check validity
@@ -46,7 +46,7 @@ async function handleLogin(e) {
             try {
                 const res = await loginService.logIn(loginData)
                 setSuccess(res.message)
-                localStorage.setItem("token",res.employeeToken)
+                localStorage.setItem("token",JSON.stringify(res.employeeToken))
                 setTimeout(() => {
                     navigate("/")
                 },2000)
@@ -65,9 +65,9 @@ async function handleLogin(e) {
                     {serverError && <div className={styles.valid_error}>{serverError}</div>}
                     {success && <div className={styles.success_msg}>{success}</div>}
                     {emailError && <div className={styles.valid_error}>{emailError}</div>}
-                    <input type="email" name="email" id="" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+                    <input type="email" name="email" id="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
                     {passwordError && <div className={styles.valid_error}>{passwordError}</div>}
-                    <input type="password" name="password" id="" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
+                    <input type="password" name="password" id="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
                     <input className={styles.login_btn} type="submit" value="Login" />
                 </form>
             </div>
