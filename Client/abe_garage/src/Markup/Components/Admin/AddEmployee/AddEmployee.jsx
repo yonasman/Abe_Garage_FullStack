@@ -1,8 +1,11 @@
 import { useState } from "react";
 import employeeService from "../../../../Services/employee.service"
+import { useAuth } from "../../../../Context/authContext";
 
 
 function AddEmployeeForm() {
+  // use auth context to access the token
+    const {employee} = useAuth();
   // variables to store user info state
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -66,7 +69,7 @@ function AddEmployeeForm() {
         activeEmployee
       }  
       // send data to the employee service to send the data to server
-      employeeService.submit(formData).then((result) => {
+      employeeService.submit(formData,employee.employeeToken).then((result) => {
         if (result.status === "failed") {
           setServerError(result.message);
         } else {
@@ -116,9 +119,9 @@ function AddEmployeeForm() {
   
                       <div className="form-group col-md-12">
                         <select name="employee_role" className="custom-select-box" value={employeeRole} onChange={e => setEmployeeRole(e.target.value)}>
-                          <option value="1">Employee</option>
-                          <option value="2">Manager</option>
-                          <option value="3">Admin</option>
+                          <option value="2">Employee</option>
+                          <option value="3">Manager</option>
+                          <option value="1">Admin</option>
                         </select>
                       </div>
   

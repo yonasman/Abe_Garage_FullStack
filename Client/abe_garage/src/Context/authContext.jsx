@@ -14,7 +14,7 @@ export const AuthProvider = function({children}) {
     const [isAdmin, setIsAdmin] = useState(false)
     const [employee, setEmployee] = useState(null)
     // values that are provided
-    const value = {isAdmin, isLoggedIn,employee,setIsAdmin,setIsLoggedIn}
+    const value = {isAdmin, isLoggedIn,employee,setIsAdmin,setIsLoggedIn,setEmployee}
     // set values for the states
     useEffect(() => {
         // retrieve employee data from local storage

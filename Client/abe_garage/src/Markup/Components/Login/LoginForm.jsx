@@ -46,6 +46,7 @@ function LoginForm() {
             try {
                 const res = await loginService.logIn(loginData)
                 setSuccess(res.message)
+                setServerError("")
                 localStorage.setItem("token",JSON.stringify(res.employeeToken))
                 setTimeout(() => {
                     navigate("/")

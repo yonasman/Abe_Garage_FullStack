@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import logo from "../../../assets/images/logo.png"
 // import custom use context function(useAuth)
 import { useAuth } from "../../../Context/authContext"
 // import logout function from login service
 import loginService from "../../../Services/login.service"
 function Header() {
+    // use navigate hook
+    const navigate = useNavigate();
     const {isAdmin,isLoggedIn,employee,setIsAdmin,setIsLoggedIn} = useAuth()
     // logout handler
     function logOutHandler() {
@@ -12,6 +14,8 @@ function Header() {
         loginService.logOut();
         // set login state to false
         setIsLoggedIn(false)
+        // route to home page
+        navigate("/");
     }
     return (
     <div>
@@ -24,7 +28,7 @@ function Header() {
                         <div className="office-hour">Monday - Saturday 7:00AM - 6:00PM</div>
                     </div>
                     <div className="right-column">
-                    {isLoggedIn ? (<div className="phone-number">Welcome {employee.employeeName}</div>):(<div className="phone-number">Schedule Your Appontment Today : <strong>1800 456 7890</strong></div>)}
+                    {isLoggedIn ? (<div className="phone-number">Welcome {employee?.employeeName}</div>):(<div className="phone-number">Schedule Your Appontment Today : <strong>1800 456 7890</strong></div>)}
                     </div>
                 </div>
             </div>
