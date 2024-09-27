@@ -7,13 +7,17 @@ import loginService from "../../../Services/login.service"
 function Header() {
     // use navigate hook
     const navigate = useNavigate();
-    const {isAdmin,isLoggedIn,employee,setIsAdmin,setIsLoggedIn} = useAuth()
+    const {isAdmin,isLoggedIn,employee,setIsAdmin,setIsLoggedIn, setEmployee} = useAuth()
+    // console.log(isLoggedIn)
     // logout handler
     function logOutHandler() {
         // remove the token and logout
         loginService.logOut();
-        // set login state to false
-        setIsLoggedIn(false)
+        // update login and admin states to false
+        setIsLoggedIn(false);
+        setIsAdmin(false);
+        // set employee state to null
+        setEmployee(null);
         // route to home page
         navigate("/");
     }
@@ -28,7 +32,7 @@ function Header() {
                         <div className="office-hour">Monday - Saturday 7:00AM - 6:00PM</div>
                     </div>
                     <div className="right-column">
-                    {isLoggedIn ? (<div className="phone-number">Welcome {employee?.employeeName}</div>):(<div className="phone-number">Schedule Your Appontment Today : <strong>1800 456 7890</strong></div>)}
+                    {isLoggedIn ? (<div className="phone-number">Welcome {employee?.employeeName}</div>):(<div className="phone-number">Schedule Your Appointment Today : <strong>1800 456 7890</strong></div>)}
                     </div>
                 </div>
             </div>
@@ -59,7 +63,7 @@ function Header() {
                         </div>
                         <div className="search-btn">
                             <button type="button" className="theme-btn search-toggler"></button></div>
-                        {isLoggedIn ? (<div className="link-btn"><a href="#" className="theme-btn btn-style-one" onClick={()=>logOutHandler()}>Sign out</a></div>):(<div className="link-btn"><Link to='/login' href="#" className="theme-btn btn-style-one">Sign in </Link></div>)} 
+                        {isLoggedIn ? (<div className="link-btn"><Link to="/" className="theme-btn btn-style-one" onClick={()=>logOutHandler()}>Sign out</Link></div>):(<div className="link-btn"><Link to='/login' href="#" className="theme-btn btn-style-one">Sign in </Link></div>)} 
                         </div> 
                     </div>                        
             </div>
