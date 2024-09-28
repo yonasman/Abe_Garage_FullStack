@@ -9,13 +9,13 @@ function VerifyToken(req,res,next) {
                 return res.status(401).json({
                     status: "failed",
                     message: "Token verification failed"
-                })
+                }
+            )
             }
             req.body['employee_role'] = decode.employee_role
             next();
         })
     } else {
-        
             return res.status(401).json(
                 {
                     status : "failed",

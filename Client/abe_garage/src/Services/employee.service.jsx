@@ -27,7 +27,21 @@ async function submit(formData,loginToken) {
     }
     
 }
+// function to get list of employees
+async function getAllEmployees(token) {
+    const requestOptions = {
+        method : 'GET',
+        headers : {
+            'Content-Type' : 'application/json',
+            'x-access-token' : token
+        }
+    }
+    // fetch employees list
+    const response = await fetch(`${baseUrl}/api/employees`,requestOptions)
+    return response
+}
 const employeeService = {
-    submit
+    submit,
+    getAllEmployees
 }
 export default employeeService
