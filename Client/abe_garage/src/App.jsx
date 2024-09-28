@@ -12,7 +12,7 @@ import UnAuthorized from "./Markup/Pages/UnAuthorized"
 import Orders from "./Markup/Components/Admin/Orders/Orders"
 import Customers from "./Markup/Components/Admin/Customers/Customers"
 import PrivateAuthRoute from "./Markup/Components/Auth/PrivateAuthRoute"
-import Employees from "./Markup/Components/Admin/Employees/Employees"
+import Employees from "./Markup/Pages/Admin/Employees"
 
 function App() {
   return (

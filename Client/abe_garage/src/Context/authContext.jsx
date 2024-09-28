@@ -20,15 +20,14 @@ export const AuthProvider = function({children}) {
             const response = await getAuth();
             if (response.employeeToken) {
                 setIsLoggedIn(true); 
-                if (response.employee_role === 1) {
+                if (response.employeeRole === 1) {
                     setIsAdmin(true); 
                 }
                 setEmployee(response); 
             }
         };
         checkAuthentication(); // Call the function to check authentication
-    }, []); 
-    console.log(isLoggedIn)
+    }, []);
     return (
         <AuthContext.Provider value={value}>
             {children}

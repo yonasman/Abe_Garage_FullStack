@@ -1,5 +1,5 @@
 // import employee service
-const {employeeExits,createEmployeeService} = require("../Services/employee.service")
+const {employeeExits,createEmployeeService, getAllEmployeesService} = require("../Services/employee.service")
 // a function to control employee creation
 async function createEmployee(req,res,next) {
     // employee data
@@ -37,4 +37,19 @@ async function createEmployee(req,res,next) {
         console.log(error)
     } 
 }
-module.exports = {createEmployee}
+// get all employees controller
+async function getAllEmployees(req,res,next) {
+    const employeesList = await getAllEmployeesService();
+    if(!employeesList) {
+        res.status(400).json({
+            status : "failed",
+            message : "Failed to get Employees"
+        })
+    } else {
+        res.status(200).json({
+            status : "success",
+            data : employeesList
+        })
+    }
+}
+module.exports = {createEmployee, getAllEmployees}
